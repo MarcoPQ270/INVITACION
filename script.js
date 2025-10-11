@@ -1,4 +1,10 @@
-// Espera a que todo el contenido de la página (imágenes, estilos, etc.) se cargue
+// Forzar el scroll al principio de la página en cada recarga.
+// Esto evita que el navegador recuerde la última posición de scroll.
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 window.addEventListener('load', () => {
 
     // --- CONFIGURACIÓN DEL SLIDESHOW DE IMÁGENES ---
