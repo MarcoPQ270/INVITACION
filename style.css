@@ -1,0 +1,286 @@
+/* Estilos generales del cuerpo de la página */
+body {
+    font-family: 'Forum', serif;
+    background-color: #f4f1eb;
+    color: #5d5d5d;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal que aparece después del splash */
+#main-content {
+    transition: opacity 1.5s ease-in-out;
+}
+
+/* --- Sección Hero (primera pantalla con imagen) --- */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+    position: relative; /* Necesario para el pseudo-elemento de fondo */
+    overflow: hidden; /* Oculta partes del pseudo-elemento que se salgan */
+}
+
+/* Pseudo-elemento para la imagen de fondo con transición */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* La imagen se controla ahora con la variable --bg-image-url desde JS */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), var(--bg-image-url);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -1; /* Lo envía detrás del contenido */
+    transition: opacity 1.5s ease-in-out; /* Anima el fundido (fade) */
+}
+
+.hero-section.fade-out::before {
+    opacity: 0;
+}
+
+.hero-section h1 {
+    font-family: 'Forum', serif;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.hero-section .names h2 {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 6em;
+    color: #ffffff;
+    margin: 0;
+    font-weight: 700;
+    border-top: 2px solid #c9a987;
+    border-bottom: 2px solid #c9a987;
+    padding: 10px 0;
+}
+
+/* --- Secciones de Contenido (Debajo del Hero) --- */
+.content-section {
+    background-color: #ffffff;
+    padding: 60px 20px;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.content-section h2 {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 4.5em; /* Ajustamos el tamaño para la nueva fuente */
+    color: #c9a987;
+    font-weight: 400; /* Pinyon Script no tiene grosor bold */
+    margin-bottom: 20px;
+}
+
+/* --- Estilos para Secciones con Imagen de Fondo --- */
+.section-bg {
+    background-color: transparent; /* Anula el fondo blanco de .content-section */
+    color: #ffffff;
+    padding: 100px 20px; /* Más espacio vertical */
+    position: relative; /* Necesario para el pseudo-elemento */
+    overflow: hidden;
+}
+
+/* Pseudo-elemento para las imágenes de fondo de las otras secciones */
+.section-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -1;
+    /* La imagen se controla ahora con la variable --bg-image-url desde JS */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), var(--bg-image-url);
+    transition: opacity 1.5s ease-in-out; /* Anima el fundido (fade) */
+}
+
+.section-bg.fade-out::before {
+    opacity: 0;
+}
+
+/* Ajusta los colores de los elementos dentro de las secciones con fondo */
+.section-bg h2, .section-bg h3, .section-bg p {
+    color: #ffffff;
+}
+
+.section-bg .map-link {
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+
+.content-section .intro-text {
+    font-size: 1.2em;
+    font-style: italic;
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+}
+.map-link {
+    color: #c9a987;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.map-link:hover {
+    color: #333;
+}
+
+/* Borde superior para separar las secciones de contenido */
+.reception-section, .rsvp-section {
+    border-top: 1px solid #eee;
+}
+
+/* Estilos específicos para la sección del contador */
+.countdown-section {
+    padding: 160px 20px; /* Aumenta el espacio vertical para hacer la sección más alta */
+}
+
+
+/* Estilos para el contador regresivo */
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 1.2em;
+}
+
+.countdown-timer div {
+    background-color: #f4f1eb;
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: #5d5d5d; /* Color oscuro para el texto (Días, Horas, etc.) */
+    width: 90px; /* Establece un ancho fijo para cada caja */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+}
+
+.countdown-timer span {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Estilos para el botón de confirmar asistencia */
+.rsvp-button {
+    display: inline-block;
+    background-color: #c9a987;
+    color: #ffffff;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.rsvp-button:hover {
+    background-color: #b89874;
+    transform: translateY(-2px); /* Efecto de levantar el botón */
+}
+
+/* --- Estilos específicos para la sección del versículo --- */
+.bible-verse-section {
+    padding: 80px 20px; /* Un poco menos de espacio vertical */
+}
+
+.bible-verse-section::before {
+    /* 'contain' asegura que toda la imagen sea visible, sin recortar. */
+    /* Puede dejar barras a los lados si la imagen no tiene la misma proporción que la pantalla. */
+    background-size: contain;
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-attachment: scroll; /* La imagen se desplaza con la página */
+}
+
+/* Estilos para que se vea bien en móviles */
+@media (max-width: 480px) {
+    .hero-section h1 {
+        font-size: 2em;
+    }
+    .hero-section .names h2 {
+        font-size: 3em;
+    }
+    .content-section h2 {
+        font-size: 2.2em;
+    }
+    .countdown-timer {
+        gap: 8px; /* Reduce el espacio entre cajas */
+        flex-wrap: nowrap; /* Evita que salte de línea */
+    }
+    .countdown-timer div {
+        padding: 8px; /* Reduce el relleno de las cajas */
+        font-size: 0.8em; /* Reduce el tamaño de "Días", "Horas", etc. */
+    }
+    .countdown-timer span {
+        font-size: 1.6em; /* Reduce el tamaño de los números */
+    }
+}
+
+/* --- Estilos para la pantalla de bienvenida (Splash Screen) --- */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* --- Imagen para la pantalla de bienvenida (Splash) --- */
+    /* Puedes usar una imagen diferente aquí si lo deseas */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./IMG/IMG_6927.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 1s ease-out;
+    text-align: center;
+}
+
+.splash-content h2 {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 6em;
+    color: #ffffff; /* Cambiado a blanco para mejor contraste */
+    margin: 0;
+    font-weight: 400; /* Pinyon Script no tiene bold */
+    opacity: 0;
+    animation: fadeInScaleUp 2s ease-out forwards;
+}
+
+.splash-content p {
+    font-family: 'Forum', serif;
+    font-size: 1.2em;
+    color: #ffffff;
+    margin-top: 15px;
+    letter-spacing: 2px; /* Espaciado entre letras para un look elegante */
+    text-transform: uppercase;
+    opacity: 0;
+    /* La animación empieza después de 0.5s */
+    animation: fadeInScaleUp 2s ease-out 0.5s forwards;
+}
+
+/* Animación para el texto de la bienvenida */
+@keyframes fadeInScaleUp {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
