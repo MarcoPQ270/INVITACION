@@ -122,6 +122,12 @@ body {
     margin-bottom: 20px;
 }
 
+/* Estilo específico para que el título "Ceremonia" sea dorado. */
+/* Usamos ambas clases para aumentar la especificidad y sobreescribir la regla de .section-bg h2 */
+.section-bg.ceremony-section h2 {
+    color: #c9a987;
+}
+
 /* --- Estilos para Secciones con Imagen de Fondo --- */
 .section-bg {
     background-color: transparent; /* Anula el fondo blanco de .content-section */
