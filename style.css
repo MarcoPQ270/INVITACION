@@ -229,6 +229,13 @@ body {
     .countdown-timer span {
         font-size: 1.6em; /* Reduce el tamaño de los números */
     }
+
+    /* Solución para el problema de zoom de imágenes en móviles */
+    /* Cambiamos el 'attachment' de 'fixed' a 'scroll' para que la imagen se desplace con la página */
+    .hero-section::before,
+    .section-bg::before {
+        background-attachment: scroll;
+    }
 }
 
 /* --- Estilos para la pantalla de bienvenida (Splash Screen) --- */
