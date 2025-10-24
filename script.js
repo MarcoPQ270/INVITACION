@@ -133,5 +133,7 @@ window.addEventListener('load', () => {
 
     // Añade un listener para que cuando el usuario haga clic en la pantalla de bienvenida, se inicie la invitación.
     // { once: true } hace que este evento solo se pueda disparar una vez.
+    // Se añade 'touchend' para mejorar la compatibilidad con dispositivos móviles.
     splashScreen.addEventListener('click', startInvitation, { once: true });
+    splashScreen.addEventListener('touchend', startInvitation, { once: true });
 });
