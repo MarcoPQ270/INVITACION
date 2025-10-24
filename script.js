@@ -57,10 +57,18 @@ window.addEventListener('load', () => {
 
     const splashScreen = document.getElementById('splash-screen');
     const mainContent = document.getElementById('main-content');
+    const audio = document.getElementById('miAudio');
 
-    // Oculta la pantalla de bienvenida y muestra la invitación después de 2.5 segundos
-    setTimeout(() => {
+    // Función para iniciar la invitación (audio, contenido, etc.)
+    function startInvitation() {
+        // Intenta reproducir el audio. El .catch es por si el navegador lo bloquea de todas formas.
+        audio.play().catch(error => {
+            console.log("La reproducción automática fue bloqueada por el navegador:", error);
+        });
+
+        // Oculta la pantalla de bienvenida
         splashScreen.style.opacity = '0';
+
         // Espera a que la animación de salida del splash termine para quitarlo del DOM
         splashScreen.addEventListener('transitionend', () => {
             splashScreen.style.display = 'none';
@@ -121,5 +129,9 @@ window.addEventListener('load', () => {
             `;
         }, 1000);
 
-    }, 2500); // Duración de la pantalla de bienvenida en milisegundos
+    }
+
+    // Añade un listener para que cuando el usuario haga clic en la pantalla de bienvenida, se inicie la invitación.
+    // { once: true } hace que este evento solo se pueda disparar una vez.
+    splashScreen.addEventListener('click', startInvitation, { once: true });
 });

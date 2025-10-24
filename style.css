@@ -343,3 +343,28 @@ body {
         transform: scale(1);
     }
 }
+
+/* Estilo y animación para el texto "Toca para continuar" */
+.enter-prompt {
+    font-family: 'Forum', serif;
+    font-size: 1em !important; /* Usamos !important para asegurar que sobreescriba otras reglas */
+    color: #ffffff;
+    margin-top: 40px !important; /* Más espacio para separarlo de la fecha */
+    letter-spacing: 1px !important;
+    text-transform: uppercase;
+    opacity: 0;
+    /* La animación empieza después de 1.5s para dar tiempo a que aparezca el resto */
+    animation: fadeInPulse 3s ease-out 1.5s infinite;
+    cursor: pointer;
+}
+
+@keyframes fadeInPulse {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
