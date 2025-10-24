@@ -70,6 +70,19 @@ window.addEventListener('load', () => {
         mainContent.style.visibility = 'visible';
         mainContent.style.opacity = '1';
 
+        // --- GESTIÓN DEL INDICADOR DE SCROLL ---
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        if (scrollIndicator) {
+            // Hace visible el indicador de scroll una vez que el contenido principal carga
+            scrollIndicator.style.opacity = '1';
+
+            // Oculta el indicador de scroll la primera vez que el usuario hace scroll
+            window.addEventListener('scroll', () => {
+                scrollIndicator.style.opacity = '0';
+            }, { once: true }); // { once: true } asegura que el listener se elimine después de ejecutarse una vez
+        }
+
+
         // Inicia los slideshows una vez que el contenido es visible
         startSlideshow('.hero-section', heroImages);
         startSlideshow('.ceremony-section', ceremonyImages);
