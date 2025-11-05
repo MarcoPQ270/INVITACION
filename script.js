@@ -197,11 +197,16 @@ window.addEventListener('load', () => {
 
     // Solo ejecuta la lógica del modal si los elementos existen en la página actual.
     if (musicModal && openModalBtn && closeModalBtn) {
-        // Event Listeners para el modal de búsqueda
-        openModalBtn.addEventListener('click', (e) => {
+        // Función para abrir el modal
+        const openMusicModal = (e) => {
             e.stopPropagation(); // Evita que el clic inicie la invitación
             musicModal.style.display = 'flex';
-        });
+        };
+
+        // Event Listeners para el modal de búsqueda (para click y touch)
+        openModalBtn.addEventListener('click', openMusicModal);
+        openModalBtn.addEventListener('touchend', openMusicModal);
+
 
         closeModalBtn.addEventListener('click', () => {
             musicModal.style.display = 'none';
@@ -229,4 +234,12 @@ window.addEventListener('load', () => {
 
     // El listener para iniciar la invitación ahora está en el splash screen completo
     splashScreen.addEventListener('click', startInvitation);
+    // Añadimos también 'touchend' para el splash screen para consistencia en móviles
+    splashScreen.addEventListener('touchend', (e) => {
+        // Prevenimos que se dispare si el toque termina en un botón
+        if (e.target.tagName === 'BUTTON') {
+            return;
+        }
+        startInvitation(e);
+    });
 });
