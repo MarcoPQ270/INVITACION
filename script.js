@@ -11,8 +11,8 @@ window.addEventListener('load', () => {
     // YA NO NECESITAMOS SPOTIFY. AHORA DEFINIMOS NUESTRA PROPIA LISTA.
     // Sube los archivos MP3 a tu proyecto y pon la ruta correcta aquí.
     const songList = [
-        { title: 'Hipno CHAMPIONS LEAGUE', url: '../AUDIO/HIMNO UEFA CHAMPIONS LEAGUE LETRA.mp3' },
-        { title: 'Perfect - Ed Sheeran', url: '../AUDIO/Ed Sheeran - Perfect.mp3' },
+        { title: 'Hipno CHAMPIONS LEAGUE', url: '../AUDIO/HIMNOUEFACHAMPIONSLEAGUELETRA.mp3' },
+        { title: 'Perfect - Ed Sheeran', url: '../AUDIO/EdSheeran-Perfect.mp3' },
         // Añade más canciones aquí
     ];
 
