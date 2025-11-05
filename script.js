@@ -74,18 +74,9 @@ window.addEventListener('load', () => {
     const mainContent = document.getElementById('main-content');
 
     // Función para iniciar la invitación (audio, contenido, etc.)
-    function startInvitation(event) { // event puede ser undefined si se llama directamente
+    function startInvitation() {
         // Si ya hay un audio, no hagas nada (evita doble ejecución)
         if (audio) return;
-
-        // Si el clic vino del botón de música o sus hijos, no inicies la invitación.
-        // Esta comprobación solo se hace si 'event' existe (es decir, si la función fue llamada por un clic)
-        if (event) {
-            const openModalBtn = document.getElementById('open-music-modal');
-            if (openModalBtn && openModalBtn.contains(event.target)) {
-                return; // Detiene la ejecución de esta función
-            }
-        }
 
         // Crea el elemento de audio con la canción seleccionada (o la por defecto)
         audio = new Audio(selectedSongUrl);
@@ -232,14 +223,4 @@ window.addEventListener('load', () => {
         });
     }
 
-    // El listener para iniciar la invitación ahora está en el splash screen completo
-    splashScreen.addEventListener('click', startInvitation);
-    // Añadimos también 'touchend' para el splash screen para consistencia en móviles
-    splashScreen.addEventListener('touchend', (e) => {
-        // Prevenimos que se dispare si el toque termina en un botón
-        if (e.target.tagName === 'BUTTON') {
-            return;
-        }
-        startInvitation(e);
-    });
 });
