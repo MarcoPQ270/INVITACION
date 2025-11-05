@@ -1,11 +1,26 @@
 // Forzar el scroll al principio de la página en cada recarga.
-// Esto evita que el navegador recuerde la última posición de scroll.
+// Esto evita que el navegador recuerde la última posición de scroll y asegura que el splash screen se vea.
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
 window.scrollTo(0, 0);
 
 window.addEventListener('load', () => {
+
+    // --- CONFIGURACIÓN DE SPOTIFY ---
+    // YA NO NECESITAMOS SPOTIFY. AHORA DEFINIMOS NUESTRA PROPIA LISTA.
+    // Sube los archivos MP3 a tu proyecto y pon la ruta correcta aquí.
+    const songList = [
+        { title: 'Hipno CHAMPIONS LEAGUE', url: '../AUDIO/HIMNO UEFA CHAMPIONS LEAGUE LETRA.mp3' },
+        { title: 'Perfect - Ed Sheeran', url: '../AUDIO/Ed Sheeran - Perfect.mp3' },
+        // Añade más canciones aquí
+    ];
+
+    // Canción que sonará si el usuario no elige ninguna.
+    // Puede ser la primera de la lista o una especial.
+    let selectedSongUrl = songList[0].url; 
+
+    let audio = null; // El elemento de audio se creará después
 
     // --- CONFIGURACIÓN DEL SLIDESHOW DE IMÁGENES ---
 
@@ -57,13 +72,28 @@ window.addEventListener('load', () => {
 
     const splashScreen = document.getElementById('splash-screen');
     const mainContent = document.getElementById('main-content');
-    const audio = document.getElementById('miAudio');
 
     // Función para iniciar la invitación (audio, contenido, etc.)
-    function startInvitation() {
-        // Intenta reproducir el audio. El .catch es por si el navegador lo bloquea de todas formas.
-        audio.play().catch(error => {
-            console.log("La reproducción automática fue bloqueada por el navegador:", error);
+    function startInvitation(event) { // event puede ser undefined si se llama directamente
+        // Si ya hay un audio, no hagas nada (evita doble ejecución)
+        if (audio) return;
+
+        // Si el clic vino del botón de música o sus hijos, no inicies la invitación.
+        // Esta comprobación solo se hace si 'event' existe (es decir, si la función fue llamada por un clic)
+        if (event) {
+            const openModalBtn = document.getElementById('open-music-modal');
+            if (openModalBtn && openModalBtn.contains(event.target)) {
+                return; // Detiene la ejecución de esta función
+            }
+        }
+
+        // Crea el elemento de audio con la canción seleccionada (o la por defecto)
+        audio = new Audio(selectedSongUrl);
+        audio.preload = 'auto';
+
+        // Intenta reproducir el audio.
+        audio.play().catch(e => {
+            console.log("La reproducción automática fue bloqueada por el navegador.", e);
         });
 
         // Oculta la pantalla de bienvenida
@@ -131,9 +161,72 @@ window.addEventListener('load', () => {
 
     }
 
-    // Añade un listener para que cuando el usuario haga clic en la pantalla de bienvenida, se inicie la invitación.
-    // { once: true } hace que este evento solo se pueda disparar una vez.
-    // Se añade 'touchend' para mejorar la compatibilidad con dispositivos móviles.
-    splashScreen.addEventListener('click', startInvitation, { once: true });
-    splashScreen.addEventListener('touchend', startInvitation, { once: true });
+    // --- LÓGICA DEL MODAL DE MÚSICA ---
+    const musicModal = document.getElementById('music-modal');
+    const openModalBtn = document.getElementById('open-music-modal');
+    const closeModalBtn = musicModal ? musicModal.querySelector('.close-modal') : null;
+    const songListContainer = document.getElementById('song-list-container');
+
+    // Elementos del nuevo modal de confirmación
+    const confirmModal = document.getElementById('confirm-modal');
+    const confirmSongTitle = document.getElementById('confirm-song-title');
+    const confirmYesBtn = document.getElementById('confirm-yes-btn');
+    const confirmNoBtn = document.getElementById('confirm-no-btn');
+
+    let tempSong = { url: '', title: '' }; // Objeto temporal para guardar la canción seleccionada
+
+    // Función para construir la lista de canciones en el modal
+    function buildSongList() {
+        if (!songListContainer) return;
+
+        songList.forEach(song => {
+            const item = document.createElement('div');
+            item.className = 'song-list-item'; // Usaremos una nueva clase CSS
+            item.textContent = song.title;
+            
+            item.addEventListener('click', () => {
+                tempSong = { url: song.url, title: song.title };
+                confirmSongTitle.textContent = tempSong.title;
+                musicModal.style.display = 'none';
+                confirmModal.style.display = 'flex';
+            });
+
+            songListContainer.appendChild(item);
+        });
+    }
+
+    // Solo ejecuta la lógica del modal si los elementos existen en la página actual.
+    if (musicModal && openModalBtn && closeModalBtn) {
+        // Event Listeners para el modal de búsqueda
+        openModalBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita que el clic inicie la invitación
+            musicModal.style.display = 'flex';
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            musicModal.style.display = 'none';
+        });
+
+        // Construimos la lista de canciones una sola vez
+        buildSongList();
+        
+        // Event Listeners para el nuevo modal de confirmación
+        confirmYesBtn.addEventListener('click', () => {
+            // Asigna la canción seleccionada
+            selectedSongUrl = tempSong.url;
+            // Cierra el modal de confirmación
+            confirmModal.style.display = 'none';
+            // Inicia la invitación
+            startInvitation();
+        });
+
+        confirmNoBtn.addEventListener('click', () => {
+            // Cierra el modal de confirmación y vuelve a abrir el de búsqueda
+            confirmModal.style.display = 'none';
+            musicModal.style.display = 'flex';
+        });
+    }
+
+    // El listener para iniciar la invitación ahora está en el splash screen completo
+    splashScreen.addEventListener('click', startInvitation);
 });
