@@ -13,7 +13,6 @@ window.addEventListener('load', () => {
     const songList = [
         { title: 'Hipno CHAMPIONS LEAGUE', url: '../AUDIO/HIMNOUEFACHAMPIONSLEAGUELETRA.mp3' },
         { title: 'Perfect - Ed Sheeran', url: '../AUDIO/EdSheeran-Perfect.mp3' },
-        // Añade más canciones aquí
     ];
 
     // Canción que sonará si el usuario no elige ninguna.
