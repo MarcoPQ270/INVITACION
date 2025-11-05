@@ -11,7 +11,7 @@ window.addEventListener('load', () => {
     // YA NO NECESITAMOS SPOTIFY. AHORA DEFINIMOS NUESTRA PROPIA LISTA.
     // Sube los archivos MP3 a tu proyecto y pon la ruta correcta aquí.
     const songList = [
-        { title: 'Hipno CHAMPIONS LEAGUE', url: './AUDIO/HIMNOUEFACHAMPIONSLEAGUELETRA.mp3' },
+        { title: 'Himno CHAMPIONS LEAGUE', url: './AUDIO/HIMNOUEFACHAMPIONSLEAGUELETRA.mp3' },
         { title: 'Perfect - Ed Sheeran', url: './AUDIO/EdSheeran-Perfect.mp3' },
     ];
 
@@ -151,75 +151,9 @@ window.addEventListener('load', () => {
 
     }
 
-    // --- LÓGICA DEL MODAL DE MÚSICA ---
-    const musicModal = document.getElementById('music-modal');
-    const openModalBtn = document.getElementById('open-music-modal');
-    const closeModalBtn = musicModal ? musicModal.querySelector('.close-modal') : null;
-    const songListContainer = document.getElementById('song-list-container');
-
-    // Elementos del nuevo modal de confirmación
-    const confirmModal = document.getElementById('confirm-modal');
-    const confirmSongTitle = document.getElementById('confirm-song-title');
-    const confirmYesBtn = document.getElementById('confirm-yes-btn');
-    const confirmNoBtn = document.getElementById('confirm-no-btn');
-
-    let tempSong = { url: '', title: '' }; // Objeto temporal para guardar la canción seleccionada
-
-    // Función para construir la lista de canciones en el modal
-    function buildSongList() {
-        if (!songListContainer) return;
-
-        songList.forEach(song => {
-            const item = document.createElement('div');
-            item.className = 'song-list-item'; // Usaremos una nueva clase CSS
-            item.textContent = song.title;
-            
-            item.addEventListener('click', () => {
-                tempSong = { url: song.url, title: song.title };
-                confirmSongTitle.textContent = tempSong.title;
-                musicModal.style.display = 'none';
-                confirmModal.style.display = 'flex';
-            });
-
-            songListContainer.appendChild(item);
-        });
-    }
-
-    // Solo ejecuta la lógica del modal si los elementos existen en la página actual.
-    if (musicModal && openModalBtn && closeModalBtn) {
-        // Función para abrir el modal
-        const openMusicModal = (e) => {
-            e.stopPropagation(); // Evita que el clic inicie la invitación
-            musicModal.style.display = 'flex';
-        };
-
-        // Event Listeners para el modal de búsqueda (para click y touch)
-        openModalBtn.addEventListener('click', openMusicModal);
-        openModalBtn.addEventListener('touchend', openMusicModal);
-
-
-        closeModalBtn.addEventListener('click', () => {
-            musicModal.style.display = 'none';
-        });
-
-        // Construimos la lista de canciones una sola vez
-        buildSongList();
-        
-        // Event Listeners para el nuevo modal de confirmación
-        confirmYesBtn.addEventListener('click', () => {
-            // Asigna la canción seleccionada
-            selectedSongUrl = tempSong.url;
-            // Cierra el modal de confirmación
-            confirmModal.style.display = 'none';
-            // Inicia la invitación
-            startInvitation();
-        });
-
-        confirmNoBtn.addEventListener('click', () => {
-            // Cierra el modal de confirmación y vuelve a abrir el de búsqueda
-            confirmModal.style.display = 'none';
-            musicModal.style.display = 'flex';
-        });
-    }
+    // --- LÓGICA DE INICIO ---
+    // Al hacer clic o tocar en cualquier parte de la pantalla de bienvenida, inicia la invitación.
+    splashScreen.addEventListener('click', startInvitation);
+    splashScreen.addEventListener('touchend', startInvitation);
 
 });
