@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Cambia el color de la barra de navegación en móviles -->
+    <meta name="theme-color" content="#c9a987">
+    <title>Nuestra Boda - Miriam & Marco</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Forum&family=Pinyon+Script&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Cambia "RUTA_A_TU_NUEVA_CANCION.mp3" por la ruta de tu nuevo archivo de audio -->
+<audio id="miAudio" src="./HIMNO UEFA CHAMPIONS LEAGUE LETRA.mp3" preload="auto"></audio>
+
+    <div id="splash-screen">
+        <div class="splash-content">
+            <h2>Miriam & Marco</h2>
+            <p>20 de Diciembre de 2025</p>
+            <p class="enter-prompt">Toca para continuar</p>
+        </div>
+    </div>
+
+    <!-- Contenido principal de la invitación, ahora como una página con secciones -->
+    <main id="main-content" style="visibility: hidden; opacity: 0;">
+        <!-- Sección 1: Hero con imagen de fondo -->
+        <header class="hero-section">
+            <h1>¡Nos Casamos!</h1>
+            <div class="names">
+                <h2>Miriam & Marco</h2>
+            </div>
+            <h1>20 de Diciembre de 2025</h1> 
+            <div class="scroll-indicator">
+                <!-- Flecha de scroll -->
+            </div>
+        </header>
+
+        <!-- Sección 2: Mensaje de invitación -->
+        <section class="content-section">
+            <p class="intro-text">"¡Encontré el amor de mi vida! Lo abracé y no lo solté..."</p>
+            <h3>Cantares 3:4</h3>
+        </section>
+
+        <!-- Sección 3: Ceremonia -->
+        <section class="content-section ceremony-section section-bg">
+            <h2>Ceremonia</h2>
+            <p><strong>SÁBADO, 20 DE DICIEMBRE DE 2025 - 12:00PM</strong></p>
+            <h3>Santuario De Guadalupe</h3>
+            <p>Comonfort, Guanajuato</p>
+            <a href="https://maps.app.goo.gl/zehbDWW8fRFCFFAA7?g_st=aw" target="_blank" class="map-link">Ver Ubicación</a>
+        </section>
+
+        <!-- Sección 4: Recepción -->
+        <section class="content-section reception-section">
+            <h2>Recepción</h2>
+            <p>Nos encantaría celebrar contigo después de la ceremonia.</p>
+            <h3>Salón Gran Emporio</h3>
+            <p>Comonfort, Guanajuato</p>
+            <a href="https://maps.app.goo.gl/nKvWCjMKh9U9YFLm9?g_st=aw" target="_blank" class="map-link">Ver Ubicación</a>
+        </section>
+
+        <!-- Sección 5: Contador -->
+        <section class="content-section countdown-section section-bg">
+            <h3>Faltan:</h3>
+            <div id="countdown" class="countdown-timer">
+            </div>
+        </section>
+
+        <!-- Sección 6: Confirmación -->
+        <section class="content-section rsvp-section">
+            <h3>Codigo de vestimenta</h3>
+            <p>Formal / Casual</p>
+            <p>Por favor evitar prendas de color blanco, plata, beige o tonos similares</p>
+            
+        </section>
+
+        <!-- Sección 7: Versículo -->
+        <section class="content-section bible-verse-section section-bg">
+            <p class="intro-text">"El destino nos unió, el amor nos hizo inseparables y ahora queremos compartir con ustedes el dia en que nuestros sueños se hacen realidad."</p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
