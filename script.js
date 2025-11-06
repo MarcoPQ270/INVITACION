@@ -11,11 +11,7 @@ window.addEventListener('load', () => {
     // Lista de canciones para la invitación principal.
     // Asegúrate de que los archivos 1.mp3, 2.mp3, etc., estén en la carpeta /AUDIO.
     const songList = [
-        { title: 'Canción 1', url: './AUDIO/1.mp3' },
         { title: 'Canción 2', url: './AUDIO/2.mp3' },
-        { title: 'Canción 3', url: './AUDIO/3.mp3' },
-        { title: 'Canción 4', url: './AUDIO/4.mp3' },
-        { title: 'Canción 5', url: './AUDIO/5.mp3' },
     ];
 
     // Selecciona una canción aleatoria de la lista para la invitación principal.
