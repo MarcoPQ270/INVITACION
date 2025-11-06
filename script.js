@@ -8,16 +8,19 @@ window.scrollTo(0, 0);
 window.addEventListener('load', () => {
 
     // --- CONFIGURACIÓN DE SPOTIFY ---
-    // YA NO NECESITAMOS SPOTIFY. AHORA DEFINIMOS NUESTRA PROPIA LISTA.
-    // Sube los archivos MP3 a tu proyecto y pon la ruta correcta aquí.
+    // Lista de canciones para la invitación principal.
+    // Asegúrate de que los archivos 1.mp3, 2.mp3, etc., estén en la carpeta /AUDIO.
     const songList = [
-        { title: 'Himno CHAMPIONS LEAGUE', url: './AUDIO/HIMNOUEFACHAMPIONSLEAGUELETRA.mp3' },
-        { title: 'Perfect - Ed Sheeran', url: './AUDIO/EdSheeran-Perfect.mp3' },
+        { title: 'Canción 1', url: './AUDIO/1.mp3' },
+        { title: 'Canción 2', url: './AUDIO/2.mp3' },
+        { title: 'Canción 3', url: './AUDIO/3.mp3' },
+        { title: 'Canción 4', url: './AUDIO/4.mp3' },
+        { title: 'Canción 5', url: './AUDIO/5.mp3' },
     ];
 
-    // Canción que sonará si el usuario no elige ninguna.
-    // Puede ser la primera de la lista o una especial.
-    let selectedSongUrl = songList[0].url; 
+    // Selecciona una canción aleatoria de la lista para la invitación principal.
+    const randomSong = songList[Math.floor(Math.random() * songList.length)];
+    let selectedSongUrl = randomSong.url;
 
     let audio = null; // El elemento de audio se creará después
 
@@ -78,7 +81,7 @@ window.addEventListener('load', () => {
         if (audio) return;
 
         // Crea el elemento de audio con la canción seleccionada (o la por defecto)
-        audio = new Audio(selectedSongUrl);
+        audio = document.getElementById('miAudio') || new Audio(selectedSongUrl);
         audio.preload = 'auto';
 
         // Intenta reproducir el audio.
