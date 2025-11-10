@@ -155,4 +155,13 @@ window.addEventListener('load', () => {
     splashScreen.addEventListener('click', startInvitation);
     splashScreen.addEventListener('touchend', startInvitation);
 
+    // --- LÓGICA PARA CERRAR LA INVITACIÓN ---
+    const closeButton = document.getElementById('close-invitation-btn');
+    if (closeButton) {
+        closeButton.addEventListener('click', (event) => {
+            event.preventDefault(); // Previene el comportamiento por defecto del enlace
+            location.reload(); // Recarga la página
+        });
+    }
+
 });
