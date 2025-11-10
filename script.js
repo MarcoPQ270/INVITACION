@@ -161,13 +161,22 @@ window.addEventListener('load', () => {
     const closePageHandler = (event) => {
         // Previene el comportamiento por defecto del enlace (que es recargar la página).
         event.preventDefault();
-
-        // Intenta cerrar la pestaña. Esto solo funcionará si la pestaña fue abierta por un script.
-        window.close();
-
-        // Como fallback para navegadores como Safari (donde window.close() puede no funcionar),
-        // redirigimos a una página en blanco. Si la pestaña se cierra, este código no se ejecutará.
-        window.location.href = 'about:blank';
+        
+        // 1. Oculta el contenido principal para dar una respuesta visual inmediata.
+        const mainContent = document.getElementById('main-content');
+        if (mainContent) {
+            mainContent.style.transition = 'opacity 0.5s ease';
+            mainContent.style.opacity = '0';
+        }
+        
+        // 2. Intenta cerrar la pestaña.
+        window.close(); // Esto solo funcionará si la pestaña fue abierta por un script.
+        
+        // 3. Como fallback para Safari y otros navegadores, redirige a una página en blanco
+        // después de un breve retraso. Si window.close() funcionó, esta línea no se ejecutará.
+        setTimeout(() => {
+            window.location.href = 'about:blank';
+        }, 500); // 500ms es suficiente para que el efecto de opacidad se vea.
     };
 
     if (closeButton) {
