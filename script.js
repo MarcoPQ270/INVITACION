@@ -169,8 +169,10 @@ window.addEventListener('load', () => {
             mainContent.style.opacity = '0';
         }
         
-        // 2. Intenta cerrar la pestaña.
-        window.close(); // Esto solo funcionará si la pestaña fue abierta por un script.
+        // 2. Intenta un truco para cerrar la pestaña que a veces funciona en Chrome.
+        // No está garantizado, pero es la mejor opción disponible.
+        const newWindow = window.open('', '_self'); // Abre una referencia a la ventana actual.
+        newWindow.close(); // Intenta cerrarla.
         
         // 3. Como fallback para Safari y otros navegadores, redirige a una página en blanco
         // después de un breve retraso. Si window.close() funcionó, esta línea no se ejecutará.
