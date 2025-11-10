@@ -161,8 +161,13 @@ window.addEventListener('load', () => {
     const closePageHandler = (event) => {
         // Previene el comportamiento por defecto del enlace (que es recargar la página).
         event.preventDefault();
-        // Intenta cerrar la pestaña actual del navegador.
+
+        // Intenta cerrar la pestaña. Esto solo funcionará si la pestaña fue abierta por un script.
         window.close();
+
+        // Como fallback para navegadores como Safari (donde window.close() puede no funcionar),
+        // redirigimos a una página en blanco. Si la pestaña se cierra, este código no se ejecutará.
+        window.location.href = 'about:blank';
     };
 
     if (closeButton) {
